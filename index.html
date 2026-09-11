@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How do we say hello? — Gap-fill</title>
+<style>
+  :root{
+    --blue:#34AFE0;
+    --dark-blue:#0F4078;
+    --deep:#003879;
+    --sand:#F7EADF;
+    --grey:#EDEDED;
+    --black:#001731;
+    --correct:#1e9e5c;
+    --wrong:#d1453b;
+    --font-ui:'Segoe UI', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:var(--font-ui);
+    background:var(--grey);
+    color:var(--black);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+  }
+  .page{
+    width:100%;
+    max-width:1180px;
+    height:98vh;
+    max-height:800px;
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 2px 14px rgba(0,23,49,0.12);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  header{
+    background:var(--dark-blue);
+    color:#fff;
+    padding:10px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex:0 0 auto;
+  }
+  header h1{
+    font-size:1.05rem;
+    margin:0;
+    font-weight:600;
+  }
+  header .wave{
+    position:absolute;
+  }
+  #fsBtn{
+    background:var(--blue);
+    color:var(--deep);
+    border:none;
+    border-radius:8px;
+    padding:6px 14px;
+    font-size:0.85rem;
+    font-weight:600;
+    cursor:pointer;
+  }
+  #fsBtn:hover{background:#5fc4ec;}
+  main{
+    flex:1 1 auto;
+    display:grid;
+    grid-template-columns:230px 1fr;
+    gap:0;
+    overflow:hidden;
+  }
+  .wordlist{
+    background:var(--sand);
+    padding:12px 14px;
+    overflow-y:auto;
+    border-right:1px solid #e4d7c6;
+  }
+  .wordlist h2{
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--deep);
+    margin:0 0 8px 0;
+  }
+  .wordlist table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.8rem;
+  }
+  .wordlist td{
+    padding:3px 2px;
+    border-bottom:1px solid #ecdfce;
+    vertical-align:top;
+  }
+  .wordlist td:first-child{
+    font-weight:600;
+    color:var(--deep);
+    width:52%;
+  }
+  .wordlist td:last-child{
+    color:#444;
+    font-style:italic;
+  }
+  .reading{
+    padding:14px 22px;
+    overflow-y:auto;
+    font-size:0.92rem;
+    line-height:1.55;
+  }
+  .reading h2{
+    font-size:1rem;
+    margin:0 0 8px 0;
+    color:var(--deep);
+  }
+  .reading p{
+    margin:0 0 10px 0;
+  }
+  .gap{
+    border:none;
+    border-bottom:2px solid var(--blue);
+    background:transparent;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:600;
+    color:var(--dark-blue);
+    text-align:center;
+    padding:1px 3px;
+    margin:0 2px;
+    outline:none;
+  }
+  .gap:focus{
+    border-bottom-color:var(--deep);
+    background:#eaf6fd;
+  }
+  footer{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 18px;
+    background:#fafafa;
+    border-top:1px solid var(--grey);
+  }
+  #checkBtn{
+    background:var(--dark-blue);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:9px 22px;
+    font-size:0.9rem;
+    font-weight:600;
+    cursor:pointer;
+  }
+  #checkBtn:hover{background:var(--deep);}
+  #result{
+    font-size:0.9rem;
+    font-weight:600;
+  }
+  #result.ok{color:var(--correct);}
+  #result.bad{color:var(--wrong);}
+
+  @media (max-width:720px){
+    main{grid-template-columns:1fr;}
+    .wordlist{border-right:none;border-bottom:1px solid #e4d7c6;max-height:32%;}
+    .page{height:100vh;max-height:none;border-radius:0;}
+    body{padding:0;}
+  }
+
+  body:fullscreen .page,
+  body:-webkit-full-screen .page{
+    max-height:100vh;
+    border-radius:0;
+  }
+</style>
+</head>
+<body>
+
+<div class="page" id="pageEl">
+
+  <header>
+    <h1>How do we say hello? — fill in the missing words</h1>
+    <button id="fsBtn" onclick="toggleFullscreen()">⛶ Full screen</button>
+  </header>
+
+  <main>
+    <section class="wordlist">
+      <h2>Word list</h2>
+      <table>
+        <tr><td>to greet</td><td>å hilse</td></tr>
+        <tr><td>to shake hands</td><td>å håndhilse</td></tr>
+        <tr><td>to hug</td><td>å klemme</td></tr>
+        <tr><td>to bow</td><td>å bukke</td></tr>
+        <tr><td>polite</td><td>høflig</td></tr>
+        <tr><td>impolite</td><td>uhøflig</td></tr>
+        <tr><td>a custom</td><td>en skikk</td></tr>
+        <tr><td>respect</td><td>respekt</td></tr>
+        <tr><td>eye contact</td><td>øyekontakt</td></tr>
+        <tr><td>to queue</td><td>å stå i kø</td></tr>
+      </table>
+    </section>
+
+    <section class="reading">
+      <h2>How do we say hello?</h2>
+      <p>People <input class="gap" data-answer="greet" size="6"> each other in many different ways. In Norway, people often <input class="gap" data-answer="shake hands" size="12"> the first time they meet. Friends sometimes <input class="gap" data-answer="hug" size="5">. Many Norwegians like quiet communication. They do not stand very close to other people.</p>
+
+      <p>In Japan, people <input class="gap" data-answer="bow" size="5"> when they <input class="gap" data-answer="greet" size="6">. In many Arab countries, friends kiss on the cheek. In some cultures, direct <input class="gap" data-answer="eye contact" size="12"> shows <input class="gap" data-answer="respect" size="8">. In other cultures, too much <input class="gap" data-answer="eye contact" size="12"> is <input class="gap" data-answer="impolite" size="9">.</p>
+
+      <p>Time is also part of communication. In Norway, it is important to come on time. If the meeting starts at ten, people come at ten. In some countries, time is more flexible.</p>
+
+      <p>There is no right or wrong way. But when we live in a new country, it helps to understand the <input class="gap" data-answer="customs" size="8">. Then we can show <input class="gap" data-answer="respect" size="8"> – and feel respected.</p>
+    </section>
+  </main>
+
+  <footer>
+    <button id="checkBtn" onclick="checkAnswers()">Check answers</button>
+    <span id="result"></span>
+  </footer>
+
+</div>
+
+<script>
+function toggleFullscreen(){
+  const el = document.getElementById('pageEl');
+  if(!document.fullscreenElement){
+    (el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen).call(el);
+  } else {
+    (document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen).call(document);
+  }
+}
+
+function checkAnswers(){
+  const gaps = document.querySelectorAll('.gap');
+  let wrong = 0;
+  gaps.forEach(g => {
+    const answer = g.dataset.answer.trim().toLowerCase();
+    const value = g.value.trim().toLowerCase();
+    if(value !== answer) wrong++;
+  });
+  const result = document.getElementById('result');
+  if(wrong === 0){
+    result.textContent = 'All correct! 🎉';
+    result.className = 'ok';
+  } else {
+    result.textContent = wrong + ' word' + (wrong > 1 ? 's are' : ' is') + ' wrong. Try again!';
+    result.className = 'bad';
+  }
+}
+</script>
+
+</body>
+</html>
