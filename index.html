@@ -4,146 +4,203 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How do we say hello? — Gap-fill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --blue:#34AFE0;
-    --dark-blue:#0F4078;
-    --deep:#003879;
+    --dark-blue:#003879;
+    --lys-blue:#A4E5FF;
     --sand:#F7EADF;
     --grey:#EDEDED;
     --black:#001731;
-    --correct:#1e9e5c;
-    --wrong:#d1453b;
-    --font-ui:'Segoe UI', system-ui, sans-serif;
+    --correct:#255330;
+    --correct-bg:#D8F6D4;
+    --wrong:#AC0E21;
+    --wrong-bg:#FECACE;
+    --font:'Source Sans 3','Source Sans Pro','Segoe UI',system-ui,sans-serif;
   }
   *{box-sizing:border-box;}
   html,body{height:100%;}
   body{
     margin:0;
-    font-family:var(--font-ui);
+    font-family:var(--font);
     background:var(--grey);
     color:var(--black);
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:10px;
+    padding:14px;
   }
   .page{
     width:100%;
-    max-width:1180px;
-    height:98vh;
-    max-height:800px;
+    max-width:1280px;
+    height:96vh;
+    max-height:880px;
     background:#fff;
-    border-radius:14px;
-    box-shadow:0 2px 14px rgba(0,23,49,0.12);
+    border-radius:16px;
+    box-shadow:0 4px 24px rgba(0,23,49,0.16);
     display:flex;
     flex-direction:column;
     overflow:hidden;
   }
   header{
+    position:relative;
     background:var(--dark-blue);
     color:#fff;
-    padding:10px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    padding:22px 28px 34px 28px;
     flex:0 0 auto;
   }
-  header h1{
-    font-size:1.05rem;
-    margin:0;
-    font-weight:600;
+  .header-row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
   }
-  header .wave{
-    position:absolute;
+  header h1{
+    font-size:1.7rem;
+    margin:0 0 4px 0;
+    font-weight:700;
+  }
+  header p.sub{
+    margin:0;
+    font-size:1rem;
+    color:var(--lys-blue);
+    font-weight:400;
   }
   #fsBtn{
     background:var(--blue);
-    color:var(--deep);
+    color:var(--dark-blue);
     border:none;
-    border-radius:8px;
-    padding:6px 14px;
-    font-size:0.85rem;
-    font-weight:600;
+    border-radius:10px;
+    padding:11px 20px;
+    font-size:0.95rem;
+    font-weight:700;
     cursor:pointer;
+    white-space:nowrap;
+    flex:0 0 auto;
   }
   #fsBtn:hover{background:#5fc4ec;}
+  header .wave{
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    line-height:0;
+  }
+  header .wave svg{
+    display:block;
+    width:100%;
+    height:26px;
+  }
   main{
     flex:1 1 auto;
     display:grid;
-    grid-template-columns:230px 1fr;
+    grid-template-columns:280px 1fr;
     gap:0;
     overflow:hidden;
   }
   .wordlist{
     background:var(--sand);
-    padding:12px 14px;
+    padding:26px 22px;
     overflow-y:auto;
-    border-right:1px solid #e4d7c6;
+    border-right:1px solid #ecdec9;
   }
   .wordlist h2{
-    font-size:0.8rem;
+    font-size:0.95rem;
     text-transform:uppercase;
-    letter-spacing:.04em;
-    color:var(--deep);
-    margin:0 0 8px 0;
+    letter-spacing:.06em;
+    color:var(--dark-blue);
+    margin:0 0 16px 0;
+    font-weight:700;
   }
-  .wordlist table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:0.8rem;
+  .word-card{
+    background:#fff;
+    border-radius:10px;
+    padding:12px 14px;
+    margin-bottom:10px;
+    box-shadow:0 1px 3px rgba(0,23,49,0.08);
+    border-left:4px solid var(--blue);
   }
-  .wordlist td{
-    padding:3px 2px;
-    border-bottom:1px solid #ecdfce;
-    vertical-align:top;
+  .word-card .en{
+    display:block;
+    font-weight:700;
+    color:var(--dark-blue);
+    font-size:1.05rem;
   }
-  .wordlist td:first-child{
-    font-weight:600;
-    color:var(--deep);
-    width:52%;
-  }
-  .wordlist td:last-child{
-    color:#444;
+  .word-card .no{
+    display:block;
     font-style:italic;
-  }
-  .reading{
-    padding:14px 22px;
-    overflow-y:auto;
+    color:#5a5a5a;
     font-size:0.92rem;
-    line-height:1.55;
+    margin-top:2px;
+  }
+  .wordlist.hide-no .no{
+    visibility:hidden;
+  }
+  .wl-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:16px;
+  }
+  .wl-head h2{
+    margin:0;
+  }
+  #toggleNoBtn{
+    background:#fff;
+    color:var(--dark-blue);
+    border:1px solid var(--blue);
+    border-radius:8px;
+    padding:5px 10px;
+    font-size:0.78rem;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  #toggleNoBtn:hover{background:var(--lys-blue);}
+  .reading{
+    padding:30px 44px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    font-size:1.25rem;
+    line-height:2.05;
   }
   .reading h2{
-    font-size:1rem;
-    margin:0 0 8px 0;
-    color:var(--deep);
+    font-size:1.5rem;
+    margin:0 0 18px 0;
+    color:var(--dark-blue);
+    font-weight:700;
   }
   .reading p{
-    margin:0 0 10px 0;
+    margin:0 0 20px 0;
   }
   .gap{
     border:none;
-    border-bottom:2px solid var(--blue);
-    background:transparent;
+    border-bottom:3px solid var(--blue);
+    background:var(--lys-blue);
+    background:rgba(164,229,255,0.35);
+    border-radius:4px 4px 0 0;
     font-family:inherit;
-    font-size:inherit;
-    font-weight:600;
+    font-size:1.1rem;
+    font-weight:700;
     color:var(--dark-blue);
     text-align:center;
-    padding:1px 3px;
-    margin:0 2px;
+    padding:2px 6px;
+    margin:0 3px;
     outline:none;
   }
   .gap:focus{
-    border-bottom-color:var(--deep);
-    background:#eaf6fd;
+    border-bottom-color:var(--dark-blue);
+    background:rgba(164,229,255,0.65);
   }
   footer{
     flex:0 0 auto;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:10px 18px;
+    padding:16px 28px;
     background:#fafafa;
     border-top:1px solid var(--grey);
   }
@@ -151,31 +208,28 @@
     background:var(--dark-blue);
     color:#fff;
     border:none;
-    border-radius:8px;
-    padding:9px 22px;
-    font-size:0.9rem;
-    font-weight:600;
+    border-radius:10px;
+    padding:13px 30px;
+    font-size:1.05rem;
+    font-weight:700;
     cursor:pointer;
   }
-  #checkBtn:hover{background:var(--deep);}
+  #checkBtn:hover{background:#0a4a95;}
   #result{
-    font-size:0.9rem;
-    font-weight:600;
+    font-size:1.1rem;
+    font-weight:700;
+    padding:8px 16px;
+    border-radius:8px;
   }
-  #result.ok{color:var(--correct);}
-  #result.bad{color:var(--wrong);}
+  #result.ok{color:var(--correct);background:var(--correct-bg);}
+  #result.bad{color:var(--wrong);background:var(--wrong-bg);}
 
-  @media (max-width:720px){
-    main{grid-template-columns:1fr;}
-    .wordlist{border-right:none;border-bottom:1px solid #e4d7c6;max-height:32%;}
+  @media (max-width:820px){
+    main{grid-template-columns:1fr;overflow-y:auto;}
+    .wordlist{border-right:none;border-bottom:1px solid #ecdec9;}
     .page{height:100vh;max-height:none;border-radius:0;}
+    .reading{padding:24px 20px;font-size:1.1rem;}
     body{padding:0;}
-  }
-
-  body:fullscreen .page,
-  body:-webkit-full-screen .page{
-    max-height:100vh;
-    border-radius:0;
   }
 </style>
 </head>
@@ -184,29 +238,40 @@
 <div class="page" id="pageEl">
 
   <header>
-    <h1>How do we say hello? — fill in the missing words</h1>
-    <button id="fsBtn" onclick="toggleFullscreen()">⛶ Full screen</button>
+    <div class="header-row">
+      <div>
+        <h1>How do we say hello?</h1>
+        <p class="sub">Fill in the missing words from the word list.</p>
+      </div>
+      <button id="fsBtn" onclick="toggleFullscreen()">⛶ Full screen</button>
+    </div>
+    <div class="wave">
+      <svg viewBox="0 0 1280 26" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,10 C 220,26 420,0 640,12 C 860,24 1060,2 1280,14 L1280,26 L0,26 Z" fill="#34AFE0"/>
+      </svg>
+    </div>
   </header>
 
   <main>
-    <section class="wordlist">
-      <h2>Word list</h2>
-      <table>
-        <tr><td>to greet</td><td>å hilse</td></tr>
-        <tr><td>to shake hands</td><td>å håndhilse</td></tr>
-        <tr><td>to hug</td><td>å klemme</td></tr>
-        <tr><td>to bow</td><td>å bukke</td></tr>
-        <tr><td>polite</td><td>høflig</td></tr>
-        <tr><td>impolite</td><td>uhøflig</td></tr>
-        <tr><td>a custom</td><td>en skikk</td></tr>
-        <tr><td>respect</td><td>respekt</td></tr>
-        <tr><td>eye contact</td><td>øyekontakt</td></tr>
-        <tr><td>to queue</td><td>å stå i kø</td></tr>
-      </table>
+    <section class="wordlist" id="wordlist">
+      <div class="wl-head">
+        <h2>Word list</h2>
+        <button id="toggleNoBtn" onclick="toggleNorwegian()">Skjul norsk</button>
+      </div>
+      <div class="word-card"><span class="en">to greet</span><span class="no">å hilse</span></div>
+      <div class="word-card"><span class="en">to shake hands</span><span class="no">å håndhilse</span></div>
+      <div class="word-card"><span class="en">to hug</span><span class="no">å klemme</span></div>
+      <div class="word-card"><span class="en">to bow</span><span class="no">å bukke</span></div>
+      <div class="word-card"><span class="en">polite</span><span class="no">høflig</span></div>
+      <div class="word-card"><span class="en">impolite</span><span class="no">uhøflig</span></div>
+      <div class="word-card"><span class="en">a custom</span><span class="no">en skikk</span></div>
+      <div class="word-card"><span class="en">respect</span><span class="no">respekt</span></div>
+      <div class="word-card"><span class="en">eye contact</span><span class="no">øyekontakt</span></div>
+      <div class="word-card"><span class="en">to queue</span><span class="no">å stå i kø</span></div>
     </section>
 
     <section class="reading">
-      <h2>How do we say hello?</h2>
+      <h2>Read and fill in</h2>
       <p>People <input class="gap" data-answer="greet" size="6"> each other in many different ways. In Norway, people often <input class="gap" data-answer="shake hands" size="12"> the first time they meet. Friends sometimes <input class="gap" data-answer="hug" size="5">. Many Norwegians like quiet communication. They do not stand very close to other people.</p>
 
       <p>In Japan, people <input class="gap" data-answer="bow" size="5"> when they <input class="gap" data-answer="greet" size="6">. In many Arab countries, friends kiss on the cheek. In some cultures, direct <input class="gap" data-answer="eye contact" size="12"> shows <input class="gap" data-answer="respect" size="8">. In other cultures, too much <input class="gap" data-answer="eye contact" size="12"> is <input class="gap" data-answer="impolite" size="9">.</p>
@@ -225,6 +290,13 @@
 </div>
 
 <script>
+function toggleNorwegian(){
+  const wl = document.getElementById('wordlist');
+  const btn = document.getElementById('toggleNoBtn');
+  wl.classList.toggle('hide-no');
+  btn.textContent = wl.classList.contains('hide-no') ? 'Vis norsk' : 'Skjul norsk';
+}
+
 function toggleFullscreen(){
   const el = document.getElementById('pageEl');
   if(!document.fullscreenElement){
